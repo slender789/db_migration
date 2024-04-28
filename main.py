@@ -42,12 +42,6 @@ for table in tables:
     cursor_sql.execute(f"SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '{table_name}'")
     table_exists = len(cursor_sql.fetchall()) > 0
     
-    # if table_exists:
-    #     # Delete the table
-    #     cursor_sql.execute(f"DROP TABLE {table_name}")
-    #     cursor_sql.commit()
-    #     table_exists = False
-    
     if not table_exists:
         # Fetch column names and data types from MySQL table
         cursor_mysql.execute(f"DESCRIBE {table_name}")
