@@ -17,6 +17,7 @@ mysql_db_name = "test"
 sql_db_user = "sa"
 sql_db_password = "Password2"
 sql_db_host = "localhost"
+sql_db_database = "maindb"
 
 # Connect to MySQL database
 cnx_mysql = pymysql.connect(
@@ -24,10 +25,10 @@ cnx_mysql = pymysql.connect(
     host=mysql_db_host, port=int(mysql_db_port), db=mysql_db_name)
 
 # Connect to SQL Server database
-cnx_sql = pyodbc.connect(f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={sql_db_host};UID={sql_db_user};PWD={sql_db_password}")
+cnx_sql = pyodbc.connect(f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={sql_db_host};DATABASE={sql_db_database};UID={sql_db_user};PWD={sql_db_password}")
 
 # Set up SQLAlchemy engine for SQL Server connection
-engine_sql = create_engine(f'mssql+pyodbc://{sql_db_user}:{sql_db_password}@{sql_db_host}/master?driver=ODBC+Driver+17+for+SQL+Server')
+engine_sql = create_engine(f'mssql+pyodbc://{sql_db_user}:{sql_db_password}@{sql_db_host}/{sql_db_database}?driver=ODBC+Driver+17+for+SQL+Server')
 
 # Get all table names from MySQL
 cursor_mysql = cnx_mysql.cursor()
